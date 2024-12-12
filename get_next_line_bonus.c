@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaddou <mhaddou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 17:24:20 by mhaddou           #+#    #+#             */
-/*   Updated: 2024/12/10 17:51:11 by mhaddou          ###   ########.fr       */
+/*   Created: 2024/12/10 17:23:39 by mhaddou           #+#    #+#             */
+/*   Updated: 2024/12/10 17:48:55 by mhaddou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*check_rem(char **rem)
 {
@@ -22,7 +22,9 @@ static char	*check_rem(char **rem)
 		if (*rem)
 		{
 			tmp = ft_strdup(*rem);
-			return (free(*rem), *rem = NULL, line = tmp, line);
+			free(*rem);
+			*rem = NULL;
+			return (line = tmp, line);
 		}
 		else if (!*rem)
 			return (free(*rem), *rem = NULL, NULL);
@@ -43,7 +45,7 @@ char	*get_next_line(int fd)
 {
 	char		*buffer;
 	ssize_t		br;
-	static char	*rem;
+	static char	*rem[1024];
 	char		*tmp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -51,17 +53,17 @@ char	*get_next_line(int fd)
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	while (!n_pos(rem))
+	while (!n_pos(rem[fd]))
 	{
 		br = read(fd, buffer, BUFFER_SIZE);
 		if (br <= 0)
 			break ;
 		buffer[br] = '\0';
-		tmp = ft_join(rem, buffer);
-		free(rem);
-		rem = tmp;
+		tmp = ft_join(rem[fd], buffer);
+		free(rem[fd]);
+		rem[fd] = tmp;
 	}
 	free(buffer);
 	buffer = NULL;
-	return (check_rem(&rem));
+	return (check_rem(&rem[fd]));
 }

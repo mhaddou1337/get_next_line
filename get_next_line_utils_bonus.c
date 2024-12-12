@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaddou <mhaddou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 17:28:30 by mhaddou           #+#    #+#             */
-/*   Updated: 2024/12/10 17:44:43 by mhaddou          ###   ########.fr       */
+/*   Created: 2024/12/10 17:25:52 by mhaddou           #+#    #+#             */
+/*   Updated: 2024/12/10 17:35:50 by mhaddou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*n_pos(char *str)
 {
